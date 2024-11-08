@@ -184,7 +184,7 @@ Transform:
   m_GameObject: {fileID: 263901295}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.5, y: 0, z: 0}
+  m_LocalPosition: {x: -3, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -311,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 6605969092280936247, guid: c2fcf81a9aff7cf478f79a6f3c194238, type: 3}
+  Portal: {fileID: 569399784}
 --- !u!1 &528665150
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +341,7 @@ Transform:
   m_GameObject: {fileID: 528665150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -359,6 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 7839656395354410017, guid: bc073ce29ba0c0f439473f469f8cb1d3, type: 3}
+  Portal: {fileID: 569399784}
 --- !u!212 &528665155
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -542,6 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: -2
+  rotationSpeed: 1
   areaBounds: {x: 4, y: 2}
 --- !u!70 &569399788
 CapsuleCollider2D:
@@ -890,7 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.11736079, g: 0.28930807, b: 0.24515945, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -944,7 +947,7 @@ Transform:
   m_GameObject: {fileID: 921388951}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1036,6 +1039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 6605969092280936247, guid: 86b3bbb5617a94747916beb16c1b7831, type: 3}
+  Portal: {fileID: 569399784}
 --- !u!70 &921388956
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1313,7 +1317,7 @@ Transform:
   m_GameObject: {fileID: 1425646357}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 0}
+  m_LocalPosition: {x: 1, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1353,6 +1357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponHolder: {fileID: 7839656395354410017, guid: 59d7f1f652a003145bf95cf8fb2d0695, type: 3}
+  Portal: {fileID: 569399784}
 --- !u!212 &1425646361
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1829,7 +1834,7 @@ PrefabInstance:
     - target: {fileID: 3486090351823945438, guid: af8aa0bef2664fc44993c041690353f5, type: 3}
       propertyPath: animator
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 772034066}
     - target: {fileID: 8712377638906084700, guid: af8aa0bef2664fc44993c041690353f5, type: 3}
       propertyPath: m_Name
       value: GameManager

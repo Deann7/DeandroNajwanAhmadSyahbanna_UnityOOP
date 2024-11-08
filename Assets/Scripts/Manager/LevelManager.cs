@@ -7,7 +7,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject ChoseObject;
 
-    void Awake()
+    void Awake() 
     {
         if (ChoseObject != null)
         {
@@ -20,12 +20,15 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void LoadScene(string sceneName)
+    public void LoadScene(string sceneName) 
+    {
+        SceneManager.LoadScene(sceneName);
+    }
     {
         StartCoroutine(LoadSceneAsync(sceneName));
     }
 
-    IEnumerator LoadSceneAsync(string sceneName)
+    IEnumerator LoadSceneAsync(string sceneName) // Load scene with transition
     {
         if (animator != null)
         {

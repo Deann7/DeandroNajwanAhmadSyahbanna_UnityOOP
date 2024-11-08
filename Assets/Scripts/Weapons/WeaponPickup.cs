@@ -3,7 +3,9 @@ using UnityEngine;
 public class WeaponPickup : MonoBehaviour
 {
    [SerializeField] private Weapon weaponHolder;
+   [SerializeField] GameObject Portal;
    private Weapon weapon;
+
 
    void Awake() 
    {
@@ -16,6 +18,15 @@ public class WeaponPickup : MonoBehaviour
        {
            Debug.LogWarning("No weapon holder assigned");
        }
+
+       if (Portal != null)
+       {
+           Portal.SetActive(false);
+       }
+       else
+       {
+           Debug.LogWarning("No portal assigned");
+       }
    }
 
    void Start()
@@ -27,33 +38,42 @@ public class WeaponPickup : MonoBehaviour
    }
 
    void OnTriggerEnter2D(Collider2D other)
-   {
-       if (other.CompareTag("Player"))
-       {
-           Debug.Log("Weapon pickup triggered");
+{
+    if (other.CompareTag("Player"))
+    {
+        Debug.Log("Weapon pickup triggered");
 
-           if (weapon != null)
-           {
-               Weapon existingWeapon = other.GetComponentInChildren<Weapon>();
-               
-               if (existingWeapon == null)
-               {
-                   Weapon spawnedWeapon = Instantiate(weapon, other.transform.position, Quaternion.identity);
-                   spawnedWeapon.transform.SetParent(other.transform);
-                   spawnedWeapon.transform.localPosition = new Vector3(0, 0, 1);
-                   spawnedWeapon.gameObject.SetActive(true);
-               }
-               else
-               {
-                   existingWeapon.gameObject.SetActive(false); 
-               }
-           }
-           else
-           {
-               Debug.LogWarning("No weapon to pickup");
-           }
-       }
-   }
+        if (weapon != null)
+        {
+            Weapon existingWeapon = other.GetComponentInChildren<Weapon>();
+
+            if (existingWeapon == null)
+            {
+                Weapon spawnedWeapon = Instantiate(weapon, other.transform.position, Quaternion.identity);
+                spawnedWeapon.transform.SetParent(other.transform);
+                spawnedWeapon.transform.localPosition = new Vector3(0, 0, 1);
+                spawnedWeapon.gameObject.SetActive(true);
+
+                if (Portal != null)
+                {
+                    Portal.SetActive(true);
+                }
+                else
+                {
+                    Debug.LogWarning("No portal assigned");
+                }
+            }
+            else
+            {
+                existingWeapon.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No weapon to pickup");
+        }
+    }
+}
 
    void SetWeaponVisibility(bool visible)
    {
