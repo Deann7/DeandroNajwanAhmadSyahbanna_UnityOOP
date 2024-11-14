@@ -59,6 +59,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
+  ChoseObject: {fileID: 8730023013217684899}
+  currentLevel: 1
 --- !u!1 &8730023013217684899
 GameObject:
   m_ObjectHideFlags: 0

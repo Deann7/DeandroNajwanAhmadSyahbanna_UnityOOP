@@ -4,11 +4,27 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager Instance { get; private set; }
+
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject ChoseObject;
+    [SerializeField] private int currentLevel = 1;
 
-    void Awake() 
+    public int CurrentLevel => currentLevel; 
+
+    private void Awake() 
     {
+        // Singleton pattern
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         if (ChoseObject != null)
         {
             ChoseObject.SetActive(false);
@@ -22,11 +38,10 @@ public class LevelManager : MonoBehaviour
 
     public void LoadScene(string sceneName) 
     {
-        SceneManager.LoadScene(sceneName);
         StartCoroutine(LoadSceneAsync(sceneName));
     }
 
-    IEnumerator LoadSceneAsync(string sceneName) // Load scene with transition
+    private IEnumerator LoadSceneAsync(string sceneName) // Load scene with transition
     {
         if (animator != null)
         {
@@ -46,5 +61,10 @@ public class LevelManager : MonoBehaviour
         {
             Player.Instance.transform.position = new Vector3(0, -1f, Player.Instance.transform.position.z);
         }
+    }
+
+    public void SetLevel(int level)
+    {
+        currentLevel = level;
     }
 }

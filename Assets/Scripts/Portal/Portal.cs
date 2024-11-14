@@ -48,7 +48,7 @@ public class Portal : MonoBehaviour
    {
        if (other.CompareTag("Player"))
        {
-           Debug.Log("Next to the next Level");
+           Debug.Log("Move to Main Scene");
            rb.velocity = Vector2.zero;
            GetComponent<Collider2D>().enabled = false;
 
