@@ -15,6 +15,7 @@ public class AttackComponent : MonoBehaviour
 
         HitboxComponent hitbox = other.GetComponent<HitboxComponent>();
         Invincibility invincibility = other.GetComponent<Invincibility>();
+        
         if (hitbox != null && invincibility != null && !invincibility.isInvincible)
         {
             Debug.Log($"{gameObject.name} collided with {other.gameObject.name} and is dealing {damage} damage.");

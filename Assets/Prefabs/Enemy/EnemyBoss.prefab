@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee49e952460a79f4485fef37a0899045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 3
 --- !u!114 &1106436962547460201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,6 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46bd3c23c6a3a05448edff882b5ad204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 3
   leftBound: -10
   rightBound: 10
   spawnInterval: 15

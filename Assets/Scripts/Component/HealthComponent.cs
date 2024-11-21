@@ -23,6 +23,7 @@ public class HealthComponent : MonoBehaviour
         if (health <= 0)
         {
             Destroy();
+            HandleDestruction();
         }
     }
 
@@ -30,5 +31,10 @@ public class HealthComponent : MonoBehaviour
     {
         Debug.Log($"{gameObject.name} has been destroyed!");
         Destroy(gameObject); // Remove the entity from the game
+    }
+
+        private void HandleDestruction()
+    {
+        SendMessage("OnDeath", SendMessageOptions.DontRequireReceiver); // Mengaktifkan OnDeath di Enemy
     }
 }

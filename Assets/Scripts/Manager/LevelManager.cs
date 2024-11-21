@@ -14,11 +14,11 @@ public class LevelManager : MonoBehaviour
 
     private void Awake() 
     {
-        // Singleton pattern
+
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persist across scenes
+            DontDestroyOnLoad(gameObject); 
         }
         else
         {

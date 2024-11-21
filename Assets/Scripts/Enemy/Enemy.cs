@@ -1,11 +1,25 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private EnemySpawner spawner;
+    public int level = 1;
 
-    void Awake(){
-      rb = GetComponent<Rigidbody2D>();
+    public void SetSpawner(EnemySpawner enemySpawner)
+    {
+        spawner = enemySpawner;
+    }
+
+    public void OnDeath()
+    {
+        spawner?.NotifyEnemyDestroyed(this); // Melaporkan diri ke spawner
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        OnDeath();
     }
 }
+

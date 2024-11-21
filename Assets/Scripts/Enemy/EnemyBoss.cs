@@ -14,7 +14,7 @@ public class EnemyBoss : Enemy
     [Header("Weapon System")]
     [SerializeField] private Weapon weaponPrefab;
     private Transform weaponMount;
-    [SerializeField] private Vector3 weaponMountOffset = new Vector3(0.5f, 1f, -1f); // Offset from boss center
+    [SerializeField] private Vector3 weaponMountOffset = new Vector3(0.5f, 1f, -1f);
 
     private static int bossCount = 0;
     private bool movingLeft = true;

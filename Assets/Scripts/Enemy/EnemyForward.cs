@@ -4,25 +4,21 @@ public class EnemyForward : Enemy
 {
     [SerializeField] private float topBound = 5f;
     [SerializeField] private float bottomBound = -5f;
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float spawnInterval = 5f;
     [SerializeField] private float minSpawnX = -8f;
     [SerializeField] private float maxSpawnX = 8f;
     [SerializeField] private int maxEnemies = 1;
 
     private static int enemyCount = 0;
-    private bool movingUp = true;
+    private bool movingUp; // Default to false for downward movement
 
     private void Start()
     {
         if (enemyCount < maxEnemies)
         {
-            float spawnX = Random.Range(minSpawnX, maxSpawnX);
-            transform.position = new Vector3(spawnX, movingUp ? bottomBound : topBound, 0f);
             enemyCount++;
-        }
-        else
-        {
-            Destroy(gameObject);
+            InvokeRepeating(nameof(SpawnEnemy), 0f, spawnInterval);
         }
     }
 
@@ -34,27 +30,36 @@ public class EnemyForward : Enemy
         CheckScreenBounds();
     }
 
+    private void SpawnEnemy()
+    {
+        if (enemyCount >= maxEnemies)
+            return;
+
+        // Always spawn at the top with a random X position
+        float spawnX = Random.Range(minSpawnX, maxSpawnX);
+        float spawnY = topBound;
+        Vector3 spawnPosition = new Vector3(spawnX, spawnY, 0f);
+
+        // Instantiate the enemy at the top and set it to move downward
+        EnemyForward newEnemy = Instantiate(this, spawnPosition, Quaternion.identity);
+        newEnemy.movingUp = false; // Ensure the new enemy moves downward
+    }
+
     private void MoveEnemy()
     {
-        if (movingUp)
-        {
-            transform.Translate(Vector3.up * speed * Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(Vector3.down * speed * Time.deltaTime);
-        }
+        Vector3 direction = movingUp ? Vector3.up : Vector3.down;
+        transform.Translate(direction * speed * Time.deltaTime);
     }
 
     private void CheckScreenBounds()
     {
-        if (transform.position.y >= topBound)
+        if (transform.position.y <= bottomBound)
         {
-            movingUp = false;
+            movingUp = true; // Change direction when reaching the bottom
         }
-        else if (transform.position.y <= bottomBound)
+        else if (transform.position.y >= topBound)
         {
-            movingUp = true;
+            movingUp = false; // Ensure it moves downward if it reaches the top
         }
     }
 

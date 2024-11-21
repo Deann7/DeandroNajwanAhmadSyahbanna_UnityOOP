@@ -78,13 +78,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663f3fc5ff185d643bf4a69b767cd6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 1
+  enemyKilledEvent:
+    m_PersistentCalls:
+      m_Calls: []
   leftBound: -10
   rightBound: 10
   spawnInterval: 5
   minSpawnY: -5
   maxSpawnY: 5
   speed: 3
-  maxEnemies: 5
+  maxEnemies: 1
 --- !u!212 &8933461780524266295
 SpriteRenderer:
   m_ObjectHideFlags: 0
