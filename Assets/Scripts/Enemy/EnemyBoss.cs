@@ -2,22 +2,15 @@ using UnityEngine;
 
 public class EnemyBoss : Enemy
 {
-    [Header("Movement")]
-    [SerializeField] private float leftBound = -10f;
-    [SerializeField] private float rightBound = 10f;
-    [SerializeField] private float spawnInterval = 15f;
-    [SerializeField] private float minSpawnY = 3f;
-    [SerializeField] private float maxSpawnY = 5f;
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private int maxBosses = 1;
+    [Header("Movement Settings")]
+    [SerializeField] private float moveSpeed = 2f;
+    private Vector2 direction;
 
-    [Header("Weapon System")]
+    [Header("Weapon Settings")]
     [SerializeField] private Weapon weaponPrefab;
-    private Transform weaponMount;
-    [SerializeField] private Vector3 weaponMountOffset = new Vector3(0.5f, 1f, -1f);
+    [SerializeField] private Vector3 weaponMountOffset = new Vector3(0.5f, 0.3f, 0f);
 
-    private static int bossCount = 0;
-    private bool movingLeft = true;
+    private Transform weaponMount;
     private Weapon equippedWeapon;
 
     private void Awake()
@@ -25,28 +18,25 @@ public class EnemyBoss : Enemy
         CreateWeaponMount();
     }
 
-    private void CreateWeaponMount()
-    {
-        weaponMount = transform.Find("WeaponMount");
-        
-        if (weaponMount == null)
-        {
-            GameObject mountObj = new GameObject("WeaponMount");
-            weaponMount = mountObj.transform;
-            weaponMount.SetParent(transform);
-            weaponMount.localPosition = (Vector3)weaponMountOffset;
-            weaponMount.localRotation = Quaternion.Euler(0, 0, 180);
-        }
-    }
-
     private void Start()
     {
-        if (bossCount < maxBosses)
-        {
-            bossCount++;
-            InvokeRepeating(nameof(SpawnBoss), 0f, spawnInterval);
-            EquipWeapon();
-        }
+        level = 3;
+        PickRandomPositionAndDirection();
+        EquipWeapon();
+    }
+
+    private void Update()
+    {
+        MoveEnemy();
+        CheckViewportBounds();
+    }
+
+    private void CreateWeaponMount()
+    {
+        GameObject mountObj = new GameObject("WeaponMount");
+        weaponMount = mountObj.transform;
+        weaponMount.SetParent(transform);
+        weaponMount.localPosition = weaponMountOffset;
     }
 
     private void EquipWeapon()
@@ -57,67 +47,45 @@ public class EnemyBoss : Enemy
             equippedWeapon.parentTransform = transform;
             equippedWeapon.transform.localRotation = Quaternion.Euler(0, 0, 180);
         }
-        else if (weaponPrefab == null)
+        else
         {
-            Debug.LogWarning("WeaponPrefab not assigned to EnemyBoss!");
+            Debug.LogWarning("WeaponPrefab not assigned or weapon mount missing!");
         }
     }
 
-    private void Update()
+    private void PickRandomPositionAndDirection()
     {
-        MoveEnemy();
-        CheckScreenBounds();
-    }
+        Vector2 randomPosition;
+        if (Random.Range(0, 2) == 0)
+        {
+            direction = Vector2.right;
+            randomPosition = new Vector2(-0.1f, Random.Range(0.1f, 0.9f)); 
+        }
+        else
+        {
+            direction = Vector2.left;
+            randomPosition = new Vector2(1.1f, Random.Range(0.1f, 0.9f)); 
+        }
 
-    private void SpawnBoss()
-    {
-        if (bossCount >= maxBosses)
-            return;
-
-        float spawnX = movingLeft ? rightBound : leftBound;
-        float spawnY = Random.Range(minSpawnY, maxSpawnY);
-        Vector3 spawnPosition = new Vector3(spawnX, spawnY, 0f);
-
-        EnemyBoss newBoss = Instantiate(this, spawnPosition, Quaternion.identity);
-        newBoss.movingLeft = !movingLeft;
+        transform.position = Camera.main.ViewportToWorldPoint(randomPosition) + new Vector3(0, 0, 10);
     }
 
     private void MoveEnemy()
     {
-        if (movingLeft)
-        {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
-        }
+        transform.Translate(moveSpeed * Time.deltaTime * direction);
     }
 
-    private void CheckScreenBounds()
+    private void CheckViewportBounds()
     {
-        if (transform.position.x <= leftBound)
-        {
-            movingLeft = false;
-        }
-        else if (transform.position.x >= rightBound)
-        {
-            movingLeft = true;
-        }
-    }
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
 
-    private void OnDestroy()
-    {
-        bossCount--;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Vector3 mountPosition = transform.position + (Vector3)weaponMountOffset;
-        Gizmos.DrawWireSphere(mountPosition, 0.2f);
-        
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(mountPosition, Vector3.down * 2f);
+        if (viewportPosition.x < -0.1f && direction == Vector2.left) 
+        {
+            PickRandomPositionAndDirection();
+        }
+        else if (viewportPosition.x > 1.1f && direction == Vector2.right) 
+        {
+            PickRandomPositionAndDirection();
+        }
     }
 }

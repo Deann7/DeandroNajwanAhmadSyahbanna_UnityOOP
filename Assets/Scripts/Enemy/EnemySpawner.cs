@@ -7,31 +7,31 @@ public class EnemySpawner : MonoBehaviour
     [Header("Enemy Prefabs")]
     public Enemy spawnedEnemy;
 
-    public int totalKills = 0;
-    [SerializeField]
-    private int killsRequiredToIncreaseSpawn = 3;
+    [SerializeField] private int minimumKillsToIncreaseSpawnCount = 3;
+    public int totalKill = 0;
+    public int totalKillWave = 0;
 
-    private int waveKills = 0;
+    [SerializeField] private float spawnInterval = 3f;
 
-    [SerializeField] private float spawnDelay = 3f;
+    [Header("Spawned Enemies Counter")]
+    public int spawnCount = 0;
+    public int defaultSpawnCount = 1;
+    public int spawnCountMultiplier = 1;
+    public int multiplierIncreaseCount = 1;
 
     private List<Enemy> activeEnemies = new List<Enemy>();
+    private Vector2 spawnBounds;
 
-    [Header("Enemy Spawn Settings")]
-    public int spawnCount = 0;
-    public int baseSpawnCount = 1;
-    public int spawnMultiplier = 1;
-    public int multiplierStep = 1;
-
+    public bool isSpawning = false;
     public CombatManager combatManager;
-    public bool isCurrentlySpawning = false;
 
-    private Vector2 spawnBounds; // Batas layar untuk spawn posisi
+    [SerializeField] private float minSpawnY = 0f; // Batas minimum Y
+    [SerializeField] private float maxSpawnY = 5f; // Batas maksimum Y
 
     private void Start()
     {
         combatManager = FindObjectOfType<CombatManager>();
-        CalculateScreenBounds(); 
+        CalculateScreenBounds();
     }
 
     private void CalculateScreenBounds()
@@ -42,77 +42,63 @@ public class EnemySpawner : MonoBehaviour
 
     public IEnumerator SpawnEnemies()
     {
-        if (spawnedEnemy == null || !isCurrentlySpawning)
+        if (spawnedEnemy == null)
         {
-            Debug.LogWarning("Spawning is not allowed or enemy prefab is missing.");
+            Debug.LogWarning("Enemy prefab is missing!");
             yield break;
         }
-
-        spawnCount = baseSpawnCount;
-        Debug.Log($"Spawning {spawnCount} enemies...");
 
         for (int i = 0; i < spawnCount; i++)
         {
             Vector3 spawnPosition = GenerateRandomSpawnPosition();
-
             Enemy newEnemy = Instantiate(spawnedEnemy, spawnPosition, Quaternion.identity);
-
             if (newEnemy != null)
             {
                 activeEnemies.Add(newEnemy);
-                newEnemy.SetSpawner(this);
-            }
-            else
-            {
-                Debug.LogError("Failed to instantiate enemy prefab.");
+                combatManager?.EnemySpawned();
+                newEnemy.OnEnemyDefeated += NotifyEnemyDestroyed;
             }
 
-            yield return new WaitForSeconds(spawnDelay);
+            yield return new WaitForSeconds(spawnInterval);
         }
-
-        isCurrentlySpawning = false;
-        Debug.Log("Finished spawning enemies.");
     }
 
     private Vector3 GenerateRandomSpawnPosition()
     {
-        float spawnX = Random.Range(-spawnBounds.x, spawnBounds.x); 
-        float spawnY = Random.Range(-spawnBounds.y, spawnBounds.y); 
-        return new Vector3(spawnX, spawnY, 0f); 
+        float spawnX = Random.Range(-spawnBounds.x, spawnBounds.x);
+        float spawnY = Mathf.Max(Random.Range(minSpawnY, maxSpawnY), 0);
+
+        return new Vector3(spawnX, spawnY, 0f);
     }
 
-    public void NotifyEnemyDestroyed(Enemy enemy)
+    public void NotifyEnemyDestroyed(Enemy defeatedEnemy)
     {
-          activeEnemies.Remove(enemy);
-        waveKills++;
-      
-        totalKills++;
-  
-    }
-
-    private void Update()
-    {
-        bool thresholdReached = false;
-
-        if (totalKills >= killsRequiredToIncreaseSpawn && !thresholdReached)
+        if (activeEnemies.Contains(defeatedEnemy))
         {
-            killsRequiredToIncreaseSpawn += killsRequiredToIncreaseSpawn;
-            baseSpawnCount += spawnMultiplier;
-
-            if (waveKills >= multiplierStep)
-            {
-                spawnMultiplier++;
-                waveKills = 0;
-            }
+            activeEnemies.Remove(defeatedEnemy);
+            OnEnemyKilled();
+            combatManager?.EnemyDefeated();
         }
     }
 
-    public int GetRemainingEnemyCount()
+    public void OnEnemyKilled()
     {
-        activeEnemies.RemoveAll(enemy => enemy == null);
-        Debug.Log("Active enemies remaining: " + activeEnemies.Count);
-        return activeEnemies.Count;
+        totalKill++;
+        totalKillWave++;
+
+        Debug.Log($"{spawnedEnemy.name} dikalahkan. Total kill untuk spawner ini: {totalKill}");
+
+        if (totalKillWave >= minimumKillsToIncreaseSpawnCount)
+        {
+            totalKillWave = 0;
+            spawnCount = defaultSpawnCount + (spawnCountMultiplier * multiplierIncreaseCount);
+            multiplierIncreaseCount++;
+            Debug.Log($"Spawn count meningkat: {spawnCount} (Multiplier: {multiplierIncreaseCount})");
+        }
     }
 
-  
+    public bool IsWaveComplete()
+    {
+        return activeEnemies.Count == 0;
+    }
 }

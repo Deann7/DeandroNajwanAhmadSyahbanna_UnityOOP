@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6010724015137527116}
+  - component: {fileID: 8013814201927002170}
   - component: {fileID: 4439536874776736450}
   - component: {fileID: -3391132829997678069}
   - component: {fileID: 8933461780524266295}
@@ -39,6 +40,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8013814201927002170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012985138262124290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee49e952460a79f4485fef37a0899045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
 --- !u!50 &4439536874776736450
 Rigidbody2D:
   serializedVersion: 4
@@ -79,16 +93,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
   leftBound: -10
   rightBound: 10
-  spawnInterval: 5
-  minSpawnY: -5
+  minSpawnY: 0
   maxSpawnY: 5
   speed: 3
-  maxEnemies: 1
 --- !u!212 &8933461780524266295
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -133,7 +142,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.41666666, y: 0.375}
   m_AdaptiveModeThreshold: 0.5

@@ -52,10 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee49e952460a79f4485fef37a0899045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 0
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  level: 2
 --- !u!114 &3011795061071241447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,15 +66,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 2
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
   detectionRadius: 10
   speed: 4
-  spawnInterval: 7
-  minSpawnDistance: 12
-  maxSpawnDistance: 15
-  maxEnemies: 1
+  minSpawnDistance: 5
+  maxSpawnDistance: 9
 --- !u!50 &7904987090635267028
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +141,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.41666666, y: 0.375}
   m_AdaptiveModeThreshold: 0.5

@@ -3,23 +3,18 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    private EnemySpawner spawner;
-    public int level = 1;
-
-    public void SetSpawner(EnemySpawner enemySpawner)
-    {
-        spawner = enemySpawner;
-    }
+    public UnityAction<Enemy> OnEnemyDefeated;
+    [SerializeField] public int level; // Level musuh
 
     public void OnDeath()
     {
-        spawner?.NotifyEnemyDestroyed(this); // Melaporkan diri ke spawner
+        OnEnemyDefeated?.Invoke(this);
         Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        OnDeath();
+        if (gameObject.activeInHierarchy) // Pastikan OnDeath tidak dipanggil dua kali
+            OnDeath();
     }
 }
-

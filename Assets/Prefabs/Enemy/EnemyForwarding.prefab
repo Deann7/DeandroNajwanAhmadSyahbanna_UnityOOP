@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 435986933128961224}
   - component: {fileID: 8205148686272454172}
   - component: {fileID: -3017008537938949712}
+  - component: {fileID: 7321642927121704386}
   - component: {fileID: -6396404496694737723}
   - component: {fileID: -5242467081057552490}
   - component: {fileID: 540687142287690599}
@@ -79,9 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
-  enemyKilledEvent:
-    m_PersistentCalls:
-      m_Calls: []
   topBound: 5
   bottomBound: -5
   speed: 3
@@ -133,7 +131,7 @@ SpriteRenderer:
   m_Sprite: {fileID: -1922533005049632710, guid: 7059cc3cfbe4e544eae21c9a61d109c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.41666666, y: 0.375}
   m_AdaptiveModeThreshold: 0.5
@@ -186,6 +184,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.41666666, y: 0.375}
   m_EdgeRadius: 0
+--- !u!114 &7321642927121704386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6596415479303030880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee49e952460a79f4485fef37a0899045, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  level: 1
 --- !u!114 &-6396404496694737723
 MonoBehaviour:
   m_ObjectHideFlags: 0
