@@ -31,7 +31,7 @@ public class UIControl : MonoBehaviour
 
     void FindRequiredComponents()
     {
-        // Tambahkan null checking yang lebih ketat
+        
         try 
         {
             combatManager = FindObjectOfType<CombatManager>();
@@ -52,13 +52,12 @@ public class UIControl : MonoBehaviour
     {
         try 
         {
-            // Gunakan GetComponent dengan null checking
+
             var uiDocument = GetComponent<UIDocument>();
             if (uiDocument != null)
             {
                 root = uiDocument.rootVisualElement;
                 
-                // Null checking untuk setiap label
                 healthLabel = root?.Q<Label>("Health");
                 pointsLabel = root?.Q<Label>("Point");
                 waveLabel = root?.Q<Label>("Wave");
@@ -79,25 +78,22 @@ public class UIControl : MonoBehaviour
     {
         try 
         {
-            // Health
             if (playerHealthComponent != null && healthLabel != null)
             {
                 healthLabel.text = $"Health: {playerHealthComponent.health}";
             }
 
-            // Points
             if (pointsLabel != null)
             {
                 pointsLabel.text = $"Points: {totalPoints}";
             }
 
-            // Wave
+      
             if (combatManager != null && waveLabel != null)
             {
                 waveLabel.text = $"Wave: {combatManager.waveNumber}";
             }
 
-            // Total Enemies
             if (combatManager != null && totalEnemiesLabel != null)
             {
                 totalEnemiesLabel.text = $"Enemies Left: {combatManager.totalEnemies}";

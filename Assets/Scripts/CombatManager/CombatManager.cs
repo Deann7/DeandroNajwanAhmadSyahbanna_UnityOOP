@@ -53,30 +53,7 @@ public class CombatManager : MonoBehaviour
         totalEnemies++;
     }
 
-public void EnemyDefeated()
-{
-    totalEnemies--;
 
-    
-    if (enemySpawners != null)
-    {
-        foreach (EnemySpawner spawner in enemySpawners)
-        {
-            if (spawner != null && spawner.spawnedEnemy != null)
-            {
-                int enemyLevel = spawner.spawnedEnemy.level;
-                uiControl.totalPoints += enemyLevel;
-                Debug.Log($"Enemy Level: {enemyLevel}, Points Added: {enemyLevel}, Total Points: {uiControl.totalPoints}");
-            }
-        }
-    }
-
-    if (totalEnemies <= 0)
-    {
-        isWaveComplete = true;
-        waveNumber++;
-    }
-}
     public void EnemyDefeated(EnemySpawner spawner)
     {
         totalEnemies--;
