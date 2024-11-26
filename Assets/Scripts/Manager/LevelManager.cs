@@ -41,14 +41,11 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(LoadSceneAsync(sceneName));
     }
 
-    private IEnumerator LoadSceneAsync(string sceneName) // Load scene with transition
+    private IEnumerator LoadSceneAsync(string sceneName) 
     {
-        if (animator != null)
-        {
             animator.enabled = true;
             animator.SetTrigger("StartTransition");
             yield return new WaitForSeconds(1);
-        }
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
         

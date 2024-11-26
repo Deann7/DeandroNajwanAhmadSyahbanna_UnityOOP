@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (gameObject.activeInHierarchy) // Pastikan OnDeath tidak dipanggil dua kali
+        if (gameObject.activeInHierarchy) 
             OnDeath();
     }
 }

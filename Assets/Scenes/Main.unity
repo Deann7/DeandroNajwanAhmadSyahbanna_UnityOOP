@@ -188,7 +188,7 @@ PrefabInstance:
       objectReference: {fileID: 860033940}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: defaultSpawnCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: enemyPrefabs.Array.size
@@ -198,6 +198,10 @@ PrefabInstance:
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: -3391132829997678069, guid: e6ea885c6c9e2c84d8948f819afa20e0, type: 3}
+    - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
+      propertyPath: minimumKillsToIncreaseSpawnCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -253,6 +257,7 @@ MonoBehaviour:
   - {fileID: 123031526}
   - {fileID: 1349056621}
   - {fileID: 1403142051}
+  uiControl: {fileID: 1738923878}
   timer: 0
   waveInterval: 5
   waveNumber: 1
@@ -346,7 +351,7 @@ PrefabInstance:
       objectReference: {fileID: 860033940}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: defaultSpawnCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: isCurrentlySpawning
@@ -364,6 +369,10 @@ PrefabInstance:
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 6518159315668820600, guid: a7feb5c56f9e35344a7ad4a699f2fc83, type: 3}
+    - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
+      propertyPath: minimumKillsToIncreaseSpawnCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -438,6 +447,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
+      propertyPath: minSpawnY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: enemyLevel
       value: 3
       objectReference: {fileID: 0}
@@ -454,8 +467,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 860033940}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
+      propertyPath: spawnInterval
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: defaultSpawnCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: enemyPrefabs.Array.size
@@ -467,7 +484,7 @@ PrefabInstance:
       objectReference: {fileID: 7384903827726066135, guid: 9fe3c06164fba2346bf646bbc4c69a48, type: 3}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: minimumKillsToIncreaseSpawnCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -627,6 +644,70 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1738923875
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1738923877}
+  - component: {fileID: 1738923876}
+  - component: {fileID: 1738923878}
+  m_Layer: 5
+  m_Name: Properties
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1738923876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738923875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: a239d263a73978843ba9bef64bdd5202, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: d9468fef5d1c03845ae14c5d556d5fe2, type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1738923877
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738923875}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1738923878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738923875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a032b6fd51991a74ca95206b182ca662, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatManager: {fileID: 860033940}
+  playerObject: {fileID: 1905508832448085985, guid: 934d82c67dfa31440bd6068f6faa7622, type: 3}
+  totalPoints: 0
 --- !u!1001 &1883670456
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,7 +774,7 @@ PrefabInstance:
       objectReference: {fileID: 860033940}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: defaultSpawnCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
       propertyPath: enemyPrefabs.Array.size
@@ -703,6 +784,10 @@ PrefabInstance:
       propertyPath: enemyPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 435986933128961224, guid: 49bed9c94949fdb4a92fdca32e0bc968, type: 3}
+    - target: {fileID: 7567694817369702847, guid: eb0d82bd1aa3ec442a2c88d9942419db, type: 3}
+      propertyPath: minimumKillsToIncreaseSpawnCount
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -730,3 +815,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1470614119}
   - {fileID: 860033941}
+  - {fileID: 1738923877}

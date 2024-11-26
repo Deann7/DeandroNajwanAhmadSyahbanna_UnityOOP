@@ -8,7 +8,7 @@ public class EnemyBoss : Enemy
 
     [Header("Weapon Settings")]
     [SerializeField] private Weapon weaponPrefab;
-    [SerializeField] private Vector3 weaponMountOffset = new Vector3(0.5f, 0.3f, 0f);
+    [SerializeField] private Vector3 weaponMountOffset = new Vector3(0f, -1f, 0f);
 
     private Transform weaponMount;
     private Weapon equippedWeapon;

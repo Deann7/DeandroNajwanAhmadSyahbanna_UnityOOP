@@ -28,6 +28,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float minSpawnY = 0f; // Batas minimum Y
     [SerializeField] private float maxSpawnY = 5f; // Batas maksimum Y
 
+    public int pointEarned = 0;
+
     private void Start()
     {
         combatManager = FindObjectOfType<CombatManager>();
@@ -77,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
         {
             activeEnemies.Remove(defeatedEnemy);
             OnEnemyKilled();
-            combatManager?.EnemyDefeated();
+            combatManager?.EnemyDefeated(this);
         }
     }
 
@@ -85,6 +87,7 @@ public class EnemySpawner : MonoBehaviour
     {
         totalKill++;
         totalKillWave++;
+        pointEarned += spawnedEnemy.level;
 
         Debug.Log($"{spawnedEnemy.name} dikalahkan. Total kill untuk spawner ini: {totalKill}");
 
